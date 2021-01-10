@@ -60,6 +60,11 @@ def find_magic_broker():
     zeroconf.close()
 
 
-logging.basicConfig(level=logging.DEBUG)
-find_magic_broker()
-print(brokers)
+if __name__ == "__main__":
+
+    logging.basicConfig(
+        format="%(asctime)s - %(levelname)s - %(message)s", level=logging.DEBUG
+    )
+
+    find_magic_broker()
+    print(brokers)

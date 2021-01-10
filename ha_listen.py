@@ -15,6 +15,7 @@ from zeroconf import ServiceBrowser, Zeroconf, IPVersion
 service_type = "_mqtt._tcp.local."
 broker_role = b"magic"
 mqtt_topic = "#"
+wait_time = 3  # How many seconds should we want for mDNS to respond
 
 # Stub client
 client = mqtt.Client()
@@ -64,12 +65,16 @@ def find_magic_broker():
 
     zeroconf = Zeroconf()
     listener = ZeroconfListener()
+
+    logging.debug(f"staring a browser for service type of {service_type}")
     browser = ServiceBrowser(zeroconf, service_type, listener)
 
     # Pause a bit and let services respond
-    sleep(3)
+    logging.debug(f"sleeping for {wait_time} seconds")
+    sleep(wait_time)
 
     zeroconf.close()
+    logging.debug("closed the zeroconf listener")
 
     return listener.get_brokers()
 
@@ -85,7 +90,7 @@ def listen_to_broker(broker):
     client.on_message = on_message
     client.on_disconnect = on_disconnect
 
-    client.connect(broker["ip_address"], port=broker["port"], keepalive=60)
+    client.connect(ip_address, port=port, keepalive=60)
     logging.debug("connected!")
 
     client.loop_forever()
@@ -129,7 +134,7 @@ def eprint(*args, **kwargs):
 if __name__ == "__main__":
 
     logging.basicConfig(
-        format="%(asctime)s - %(levelname)s - %(message)s", level=logging.WARNING
+        format="%(asctime)s - %(levelname)s - %(message)s", level=logging.DEBUG
     )
 
     # Encode this at utf-8 for display to humans

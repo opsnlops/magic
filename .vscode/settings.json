@@ -1,12 +1,15 @@
 {
-    "python.pythonPath": "/Users/april/projects/magic/venv/bin/python3",
+    "python.pythonPath": "venv/bin/python",
     "python.formatting.provider": "black",
     "editor.formatOnSave": true,
     "cSpell.words": [
         "eprint",
+        "filter",
         "inet",
         "mqtt",
         "ntoa",
-        "paho"
+        "paho",
+        "savgol",
+        "scipy"
     ]
 }

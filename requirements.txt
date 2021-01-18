@@ -1,5 +1,6 @@
 black
 llbase
 paho-mqtt
+scipy
 wheel
 zeroconf

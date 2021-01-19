@@ -1,12 +1,16 @@
-
 CC=gcc
-CFLAGS=-I.
+CFLAGS=-I. -O2 -Wall
 
-
-sample: sample.c
-	$(CC) -o sample *.c $(CFLAGS)
-
+# Make everything by default
 all: sample
 
+creatures: creatures.c creatures.h
+	$(CC) -c $(CFLAGS) creatures.c
+
+sample: creatures sample.c
+	$(CC) -o sample *.c $(CFLAGS)
+
+# Don't run this on a make all
+.PHONY: clean
 clean:
 	rm -f *.o *.bin sample

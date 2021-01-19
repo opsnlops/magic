@@ -9,6 +9,7 @@
         "mqtt",
         "ntoa",
         "paho",
+        "rawr",
         "savgol",
         "scipy"
     ]

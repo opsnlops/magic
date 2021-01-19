@@ -26,3 +26,9 @@ Thumbs.db
 
 # Animation files
 *.bin
+
+# object files
+*.o
+
+# The sample data file maker
+sample

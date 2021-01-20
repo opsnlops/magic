@@ -13,11 +13,13 @@ FILE *open_file(char *file_name, struct Header header)
     return our_file;
 }
 
+// Close the file cleanly
 void close_file(FILE *file)
 {
     fclose(file);
 }
 
+// Write out a movement frame to disk
 void write_movement_frame(FILE *file, uint8_t *positions, int number_of_servos)
 {
     putc(MOVEMENT_FRAME_TYPE, file);

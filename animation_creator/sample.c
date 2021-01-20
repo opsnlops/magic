@@ -31,7 +31,7 @@ int main()
     struct Header header;
     header.version = (uint8_t)CREATURE_VERSION;
     header.number_of_servos = (uint8_t)5;
-    header.number_of_frames = (uint16_t)120;
+    header.number_of_frames = (uint16_t)10;
     header.time_per_frame = (uint16_t)50;
 
     printf("The size of the header is: %ld\n", sizeof(header));
@@ -46,6 +46,9 @@ int main()
         make_test_movement_frames(data, header.number_of_servos, i);
         write_movement_frame(sample_file, data, header.number_of_servos);
     }
+
+    // Write out a pause frame
+    write_pause_frame(sample_file, (uint16_t)666);
 
     close_file(sample_file);
 

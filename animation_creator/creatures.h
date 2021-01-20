@@ -21,6 +21,8 @@ struct Header
     uint16_t time_per_frame; // Number of milliseconds for each frame
 };
 
-void make_frames(uint8_t *frames, int number_of_servos, int number_of_frames);
+FILE *open_file(char *file_name, struct Header header);
+void close_file(FILE *file);
+void write_movement_frame(FILE *file, uint8_t *positions, int number_of_servos);
 
 #endif

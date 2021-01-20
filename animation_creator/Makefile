@@ -1,7 +1,9 @@
 #!/usr/bin/make -f
 
 CC=gcc
-CFLAGS=-I. -O2 -Wall
+CFLAGS=-I. -O2 -Wall -Werror=implicit-function-declaration -D_FORTIFY_SOURCE=2
+
+OBJS = creatures.o
 
 # Make everything by default
 all: sample

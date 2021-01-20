@@ -4,18 +4,22 @@
 
 #include "creatures.h"
 
-void make_frames(uint8_t *frames, int number_of_servos, int number_of_frames)
+// Write out the file with our magic number
+FILE *open_file(char *file_name, struct Header header)
 {
-    int frameNumber = 0;
-    int position = 0;
-    for (int frame = 0; frame < number_of_frames; frame++)
-    {
-        printf("working on frame %d\n", frame);
-        for (int servo = 0; servo < number_of_servos; servo++)
-        {
-            frames[position++] = (uint8_t)frame;
-        }
+    FILE *our_file = fopen(file_name, "wb");
+    fwrite(MAGIC_NUMBER, sizeof(MAGIC_NUMBER), 1, our_file);
+    fwrite(&header, sizeof(header), 1, our_file);
+    return our_file;
+}
 
-        frameNumber++;
-    }
+void close_file(FILE *file)
+{
+    fclose(file);
+}
+
+void write_movement_frame(FILE *file, uint8_t *positions, int number_of_servos)
+{
+    putc(MOVEMENT_FRAME_TYPE, file);
+    fwrite(positions, number_of_servos, 1, file);
 }

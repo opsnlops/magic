@@ -10,6 +10,11 @@
         "paho",
         "rawr",
         "savgol",
-        "scipy"
+        "scipy",
+        "struct"
+    ],
+    "python.pythonPath": "/home/april/projects/magic/venv/bin/python3",
+    "cSpell.ignoreWords": [
+        "bbhh"
     ]
 }

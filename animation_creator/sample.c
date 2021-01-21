@@ -48,7 +48,7 @@ int main()
     }
 
     // Write out a pause frame
-    write_pause_frame(sample_file, (uint16_t)666);
+    //write_pause_frame(sample_file, (uint16_t)666);
 
     close_file(sample_file);
 

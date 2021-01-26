@@ -13,7 +13,7 @@
         "scipy",
         "struct"
     ],
-    "python.pythonPath": "/home/april/projects/magic/venv/bin/python3",
+    "python.pythonPath": "/Users/april/projects/magic/venv/bin/python3",
     "cSpell.ignoreWords": [
         "bbhh"
     ]

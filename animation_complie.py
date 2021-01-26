@@ -20,7 +20,7 @@ magic_number = b"RAWR!"
 version = 1
 
 
-data_file = "data/smoothed_data.csv"
+data_file = "data/mirrored_data.csv"
 
 raw_data = []
 

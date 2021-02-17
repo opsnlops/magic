@@ -2,6 +2,7 @@
     "python.formatting.provider": "black",
     "editor.formatOnSave": true,
     "cSpell.words": [
+        "client",
         "eprint",
         "filter",
         "inet",
@@ -11,7 +12,8 @@
         "rawr",
         "savgol",
         "scipy",
-        "struct"
+        "struct",
+        "zeroconf"
     ],
     "python.pythonPath": "/Users/april/projects/magic/venv/bin/python3",
     "cSpell.ignoreWords": [

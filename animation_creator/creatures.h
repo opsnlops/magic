@@ -33,6 +33,9 @@ struct Pause
     uint16_t pause_in_milliseconds;
 } __attribute__((packed));
 
+// Our magic number as an array
+uint8_t MAGIC_NUMBER_ARRAY[5] = {0x52, 0x41, 0x57, 0x52, 0x21}
+
 FILE *open_file(char *file_name, struct Header header);
 void close_file(FILE *file);
 void write_movement_frame(FILE *file, uint8_t *positions, int number_of_servos);

@@ -16,7 +16,7 @@ service_type = "_mqtt._tcp.local."
 broker_role = b"magic"
 wait_time = 3  # How many seconds should we want for mDNS to respond
 
-heartbeat_topic = "heartbeat"
+heartbeat_topic = "system/heartbeat"
 
 
 # Stub client
@@ -100,13 +100,9 @@ def on_disconnect(client, userdata, rc):
     logging.info(f"Disconnected with result code {rc}")
 
 
-
 # Print to stderr
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
-
-
-
 
 
 if __name__ == "__main__":
@@ -166,7 +162,9 @@ if __name__ == "__main__":
             heartbeat = (hour * 3600) + (minute * 60) + second
             logging.debug(f"heartbeat: {heartbeat}")
 
-            info = client.publish(heartbeat_topic, payload=heartbeat, qos=0, retain=False)
+            info = client.publish(
+                heartbeat_topic, payload=heartbeat, qos=0, retain=False
+            )
             logging.debug(info)
 
             time.sleep(1)
@@ -180,9 +178,3 @@ if __name__ == "__main__":
         traceback.print_exc(file=sys.stdout)
 
     sys.exit(0)
-
-
-
-
-
-

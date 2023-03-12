@@ -14,7 +14,7 @@ from zeroconf import ServiceBrowser, Zeroconf, IPVersion
 # The mDNS service type we're using for the broker
 service_type = "_mqtt._tcp.local."
 broker_role = b"magic"
-wait_time = 3  # How many seconds should we want for mDNS to respond
+wait_time = 5  # How many seconds should we want for mDNS to respond
 
 heartbeat_topic = "system/heartbeat"
 
@@ -108,8 +108,10 @@ def eprint(*args, **kwargs):
 if __name__ == "__main__":
 
     logging.basicConfig(
-        format="%(asctime)s - %(levelname)s - %(message)s", level=logging.ERROR
+        format="%(asctime)s - %(levelname)s - %(message)s", level=logging.DEBUG
     )
+
+    use_default = False
 
     # Encode this at utf-8 for display to humans
     role = broker_role.decode("utf-8")
@@ -120,8 +122,8 @@ if __name__ == "__main__":
     # Make sure we have just one broker. It's an error if there's more than one, so
     # let me know that it found anything but one.
     if len(brokers) == 0:
-        eprint(f"Couldn't find any brokers in the {role} role on the network; halting.")
-        sys.exit(1)
+        eprint(f"Couldn't find any brokers in the {role} role on the network; assuming the default.")
+        use_default = True
 
     if len(brokers) > 1:
         eprint(
@@ -129,22 +131,26 @@ if __name__ == "__main__":
         )
         sys.exit(1)
 
-    # We've got the one we need
-    broker = brokers[0]
-    ip_address = broker["ip_address"]
-    port = broker["port"]
-    name = broker["name"]
-    info = broker["info"]
+    if not use_default:
+        # We've got the one we need
+        broker = brokers[0]
+        ip_address = broker["ip_address"]
+        port = broker["port"]
+        name = broker["name"]
+        info = broker["info"]
 
-    print(
-        f"""...found!
-
-    ip: {ip_address}
-    port: {port}
-    name: {name}
-    info: {info}
-    """
-    )
+        print(
+            f"""...found!
+    
+        ip: {ip_address}
+        port: {port}
+        name: {name}
+        info: {info}
+        """
+        )
+    else:
+        ip_address = "10.9.1.5"
+        port = 1883
 
     try:
 
